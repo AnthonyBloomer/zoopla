@@ -54,10 +54,10 @@ class Zoopla:
         self.api_key = api_key
 
     def local_info_graphs(self, area):
-        return self._call('local_info_graphs.js', {
+        return Graph(self._call('local_info_graphs.js', {
             'api_key': self.api_key,
             'area': area
-        })
+        }))
 
     def area_value_graphs(self, area, size='medium'):
         return Graph(self._call('area_value_graphs.js?', {
@@ -106,7 +106,8 @@ class ZooplaTests(unittest.TestCase):
 
     def test_area_value_graphs(self):
         area_graphs = self.zoopla.area_value_graphs('SW11')
-        print area_graphs.get_area_name()
+        area_name = area_graphs.get_area_name()
+        self.assertEquals(area_name.strip(), 'SW11')
 
     def test_get_average_area_sold_price(self):
         averages = self.zoopla.get_average_area_sold_price('SW11')
@@ -125,7 +126,8 @@ class ZooplaTests(unittest.TestCase):
 
     def test_local_info_graphs(self):
         local_graphs = self.zoopla.local_info_graphs('SW11')
-        self.assertIsNotNone(local_graphs['area_name'], 'SW11')
+        area_name = local_graphs.get_area_name()
+        self.assertEquals(area_name.strip(), 'SW11')
 
 
 if __name__ == '__main__':
