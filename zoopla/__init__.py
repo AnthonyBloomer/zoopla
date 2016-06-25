@@ -2,6 +2,29 @@ import requests
 import unittest
 
 
+class Graph:
+    def __init__(self, data):
+        self.data = data
+
+    def get_area_name(self):
+        return self.data['area_name']
+
+    def get_average_values_graph_url(self):
+        return self.data['average_values_graph_url']
+
+    def get_value_ranges_graph_url(self):
+        return self.data['value_ranges_graph_url']
+
+    def get_value_trend_graph_url(self):
+        return self.data['value_trend_graph_url']
+
+    def get_area_values_url(self):
+        return self.data['area_values_url']
+
+    def get_bounding_box(self):
+        return self.data['bounding_box']
+
+
 class Listing:
     def __init__(self, data):
         self.data = data
@@ -37,17 +60,17 @@ class Zoopla:
         })
 
     def area_value_graphs(self, area, size='medium'):
-        return self._call('area_value_graphs.js?', {
+        return Graph(self._call('area_value_graphs.js?', {
             'api_key': self.api_key,
             'area': area,
             'size': size
-        })
+        }))
 
     def search_property_listings(self, params):
         params.update({'api_key': self.api_key})
         c = self._call('property_listings.json?', params)
         result = []
-        [result.append(Listing(res)) for res in c['listing']]
+        [result.append(Listing(r)) for r in c['listing']]
         return result
 
     def get_average_area_sold_price(self, area=None, postcode=None, output_type='outcode', area_type='streets'):
@@ -61,7 +84,6 @@ class Zoopla:
 
     def _call(self, action, params):
         r = requests.get(self.url + action, params)
-        print r.url
         if r.status_code == 200:
             return r.json()
         else:
@@ -84,7 +106,7 @@ class ZooplaTests(unittest.TestCase):
 
     def test_area_value_graphs(self):
         area_graphs = self.zoopla.area_value_graphs('SW11')
-        self.assertIsNotNone(area_graphs['area_name'], 'SW11')
+        print area_graphs.get_area_name()
 
     def test_get_average_area_sold_price(self):
         averages = self.zoopla.get_average_area_sold_price('SW11')
