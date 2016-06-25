@@ -2,6 +2,29 @@ import requests
 import unittest
 
 
+class Listing:
+    def __init__(self, data):
+        self.data = data
+
+    def get_listing_status(self):
+        return self.data['listing_status']
+
+    def get_street_name(self):
+        return self.data['street_name']
+
+    def get_outcode(self):
+        return self.data['outcode']
+
+    def get_county(self):
+        return self.data['county']
+
+    def get_price(self):
+        return self.data['price']
+
+    def get_listing_id(self):
+        return self.data['listing_id']
+
+
 class Zoopla:
     def __init__(self, api_key):
         self.url = 'http://api.zoopla.co.uk/api/v1/'
@@ -22,7 +45,10 @@ class Zoopla:
 
     def search_property_listings(self, params):
         params.update({'api_key': self.api_key})
-        return self._call('property_listings.json?', params)
+        c = self._call('property_listings.json?', params)
+        result = []
+        [result.append(Listing(res)) for res in c['listing']]
+        return result
 
     def get_average_area_sold_price(self, area=None, postcode=None, output_type='outcode', area_type='streets'):
         return self._call('average_area_sold_price.json?', {
@@ -35,6 +61,7 @@ class Zoopla:
 
     def _call(self, action, params):
         r = requests.get(self.url + action, params)
+        print r.url
         if r.status_code == 200:
             return r.json()
         else:
@@ -61,17 +88,18 @@ class ZooplaTests(unittest.TestCase):
 
     def test_get_average_area_sold_price(self):
         averages = self.zoopla.get_average_area_sold_price('SW11')
-        print averages
         self.assertEquals(averages['average_sold_price_1year'], '814144')
 
     def test_search_property_listings(self):
         search = self.zoopla.search_property_listings(params={
             'maximum_beds': 2,
             'page_size': 100,
-            'listing_status': 'rent',
+            'listing_status': 'sale',
             'area': 'Blackley, Greater Manchester'
         })
-        self.assertEquals(search['county'], 'Greater Manchester')
+
+        first = search[0]
+        self.assertEquals(first.get_listing_status(), 'sale')
 
     def test_local_info_graphs(self):
         local_graphs = self.zoopla.local_info_graphs('SW11')
