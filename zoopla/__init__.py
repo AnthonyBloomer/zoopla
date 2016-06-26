@@ -2,6 +2,29 @@ import requests
 import unittest
 
 
+class Average:
+    def __init__(self, data):
+        self.data = data
+
+    def get_number_of_sales_5year(self):
+        return self.data['number_of_sales_5year']
+
+    def get_average_sold_price_5year(self):
+        return self.data['average_sold_price_5year']
+
+    def get_number_of_sales_3year(self):
+        return self.data['number_of_sales_3year']
+
+    def get_average_sold_price_3year(self):
+        return self.data['average_sold_price_3year']
+
+    def get_number_of_sales_1year(self):
+        return self.data['number_of_sales_1year']
+
+    def get_average_sold_price_1year(self):
+        return self.data['average_sold_price_1year']
+
+
 class Graph:
     def __init__(self, data):
         self.data = data
@@ -74,13 +97,13 @@ class Zoopla:
         return result
 
     def get_average_area_sold_price(self, area=None, postcode=None, output_type='outcode', area_type='streets'):
-        return self._call('average_area_sold_price.json?', {
+        return Average(self._call('average_area_sold_price.json?', {
             'api_key': self.api_key,
             'postcode': postcode,
             'area': area,
             'output_type': output_type,
             'area_type': area_type
-        })
+        }))
 
     def _call(self, action, params):
         r = requests.get(self.url + action, params)
@@ -111,7 +134,7 @@ class ZooplaTests(unittest.TestCase):
 
     def test_get_average_area_sold_price(self):
         averages = self.zoopla.get_average_area_sold_price('SW11')
-        self.assertEquals(averages['average_sold_price_1year'], '814144')
+        self.assertEquals(averages.get_average_sold_price_1year(), '814144')
 
     def test_search_property_listings(self):
         search = self.zoopla.search_property_listings(params={
