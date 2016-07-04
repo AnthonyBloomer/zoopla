@@ -13,6 +13,13 @@ class Zoopla:
             'area': area
         }))
 
+    def zed_index(self, area, output_type='outcode'):
+        return self._call('zed_index.js?', {
+            'api_key': self.api_key,
+            'area': area,
+            'output_type': output_type
+        })
+
     def area_value_graphs(self, area, size='medium'):
         return Graph(self._call('area_value_graphs.js?', {
             'api_key': self.api_key,
@@ -39,7 +46,6 @@ class Zoopla:
     def _call(self, action, params):
         r = requests.get(self.url + action, params)
         if r.status_code == 200:
-            print r.json()
             return r.json()
         else:
             raise ZooplaException(str(r.status_code), r.reason, r.text)

@@ -31,6 +31,11 @@ class ZooplaTests(unittest.TestCase):
         area_name = local_graphs.get_area_name()
         self.assertEquals(area_name.strip(), 'SW11')
 
+    def test_zed_index(self):
+        zed = self.zoopla.zed_index('SW11')
+        index = zed['zed_index_1year']
+        self.assertEqual(index, 851720)
+
 
 if __name__ == '__main__':
     unittest.main()
