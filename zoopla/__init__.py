@@ -1,74 +1,5 @@
 import requests
-import unittest
-
-
-class Average:
-    def __init__(self, data):
-        self.data = data
-
-    def get_number_of_sales_5year(self):
-        return self.data['number_of_sales_5year']
-
-    def get_average_sold_price_5year(self):
-        return self.data['average_sold_price_5year']
-
-    def get_number_of_sales_3year(self):
-        return self.data['number_of_sales_3year']
-
-    def get_average_sold_price_3year(self):
-        return self.data['average_sold_price_3year']
-
-    def get_number_of_sales_1year(self):
-        return self.data['number_of_sales_1year']
-
-    def get_average_sold_price_1year(self):
-        return self.data['average_sold_price_1year']
-
-
-class Graph:
-    def __init__(self, data):
-        self.data = data
-
-    def get_area_name(self):
-        return self.data['area_name']
-
-    def get_average_values_graph_url(self):
-        return self.data['average_values_graph_url']
-
-    def get_value_ranges_graph_url(self):
-        return self.data['value_ranges_graph_url']
-
-    def get_value_trend_graph_url(self):
-        return self.data['value_trend_graph_url']
-
-    def get_area_values_url(self):
-        return self.data['area_values_url']
-
-    def get_bounding_box(self):
-        return self.data['bounding_box']
-
-
-class Listing:
-    def __init__(self, data):
-        self.data = data
-
-    def get_listing_status(self):
-        return self.data['listing_status']
-
-    def get_street_name(self):
-        return self.data['street_name']
-
-    def get_outcode(self):
-        return self.data['outcode']
-
-    def get_county(self):
-        return self.data['county']
-
-    def get_price(self):
-        return self.data['price']
-
-    def get_listing_id(self):
-        return self.data['listing_id']
+from objects import Listing, Average, Graph
 
 
 class Zoopla:
@@ -108,6 +39,7 @@ class Zoopla:
     def _call(self, action, params):
         r = requests.get(self.url + action, params)
         if r.status_code == 200:
+            print r.json()
             return r.json()
         else:
             raise ZooplaException(str(r.status_code), r.reason, r.text)
@@ -121,37 +53,3 @@ class ZooplaException(Exception):
 
     def __str__(self):
         return "Zoopla returned an error: " + str(self.status_code) + " - " + self.reason + " - " + self.text
-
-
-class ZooplaTests(unittest.TestCase):
-    def setUp(self):
-        self.zoopla = Zoopla('')
-
-    def test_area_value_graphs(self):
-        area_graphs = self.zoopla.area_value_graphs('SW11')
-        area_name = area_graphs.get_area_name()
-        self.assertEquals(area_name.strip(), 'SW11')
-
-    def test_get_average_area_sold_price(self):
-        averages = self.zoopla.get_average_area_sold_price('SW11')
-        self.assertEquals(averages.get_average_sold_price_1year(), '814144')
-
-    def test_search_property_listings(self):
-        search = self.zoopla.search_property_listings(params={
-            'maximum_beds': 2,
-            'page_size': 100,
-            'listing_status': 'sale',
-            'area': 'Blackley, Greater Manchester'
-        })
-
-        first = search[0]
-        self.assertEquals(first.get_listing_status(), 'sale')
-
-    def test_local_info_graphs(self):
-        local_graphs = self.zoopla.local_info_graphs('SW11')
-        area_name = local_graphs.get_area_name()
-        self.assertEquals(area_name.strip(), 'SW11')
-
-
-if __name__ == '__main__':
-    unittest.main()
