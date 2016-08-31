@@ -51,8 +51,6 @@ class Zoopla:
     def _call(self, action, params):
         r = requests.get(self.url + action, params)
         if r.status_code == 200:
-            print r.url
-            print r.json()
             return r.json()
         else:
             raise ZooplaException(str(r.status_code), r.reason, r.text)
