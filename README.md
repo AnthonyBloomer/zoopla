@@ -1,13 +1,19 @@
 # zoopla
 A python wrapper for the Zoopla API.
 
+Zoopla has launched an open API to allow developers to create applications using hyper local data on 27m homes, over 1m sale and rental listings, and 15 years of sold price data.
+
+[Register](http://developer.zoopla.com/member/register/) for a user account and [apply](http://developer.zoopla.com/member/register/) for an instant API key.
+
+Browse the [documentation](http://developer.zoopla.com/docs/) to understand how to use the API and the specifications for the individual APIs.
+
 ## Examples
 
 ### Search
 ```python
 zoopla = Zoopla('your_api_key')
 
-search = self.zoopla.search_property_listings(params={
+search = zoopla.search_property_listings(params={
     'maximum_beds': 2,
     'page_size': 100,
     'listing_status': 'sale',
