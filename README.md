@@ -20,3 +20,13 @@ for result in search:
     print result.image_url
   
 ```
+
+### Area Value Graphs
+
+```python
+area_graphs = zoopla.area_value_graphs('SW11')
+
+print area_graphs.average_values_graph_url
+print area_graphs.value_trend_graph_url
+
+```
