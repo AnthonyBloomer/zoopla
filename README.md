@@ -30,3 +30,11 @@ print area_graphs.average_values_graph_url
 print area_graphs.value_trend_graph_url
 
 ```
+
+### Average Area Sold Price
+
+```python
+average = zoopla.get_average_area_sold_price('SW11')
+print average.average_sold_price_7year
+print average.average_sold_price_5year
+```
