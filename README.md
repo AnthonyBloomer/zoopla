@@ -37,7 +37,7 @@ print area_graphs.value_trend_graph_url
 
 ```
 
-Retrieve the average sale price for a particular sub-area type within a particular area.
+Retrieve the average sale price for houses in a particular area.
 
 ```python
 average = zoopla.get_average_area_sold_price('SW11')
