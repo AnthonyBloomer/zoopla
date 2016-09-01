@@ -36,6 +36,7 @@ class Zoopla:
     
     '''
     Description: Generate a graph of values for an outcode over the previous 3 months and return the URL to the generated image.
+    Access URI: http://api.zoopla.co.uk/api/v1/area_value_graphs
     '''
     def area_value_graphs(self, area, size='medium'):
         return Object(**self._call('area_value_graphs.js?', {
