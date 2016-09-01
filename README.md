@@ -9,7 +9,7 @@ Browse the [documentation](http://developer.zoopla.com/docs/) to understand how 
 
 ## Examples
 
-### Search
+Retrieve property listings for a given area.
 ```python
 zoopla = Zoopla('your_api_key')
 
@@ -27,7 +27,7 @@ for result in search:
   
 ```
 
-### Area Value Graphs
+Generate a graph of values for an outcode over the previous 3 months and return the URL to the generated image.
 
 ```python
 area_graphs = zoopla.area_value_graphs('SW11')
@@ -37,7 +37,7 @@ print area_graphs.value_trend_graph_url
 
 ```
 
-### Average Area Sold Price
+Retrieve the average sale price for a particular sub-area type within a particular area.
 
 ```python
 average = zoopla.get_average_area_sold_price('SW11')
