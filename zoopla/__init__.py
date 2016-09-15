@@ -48,6 +48,13 @@ class Zoopla:
             'area_type': area_type
         }))
     
+    def auto_complete(self, search_term, search_type='properties'):
+        return Object(**self._call('geo_autocomplete.json?', {
+            'api_key': self.api_key,
+            'search_term': search_term,
+            'search_type': search_type
+        }))
+    
     def area_zed_indices(self, area, area_type='streets', output_type='area', order='ascending', page_number=1, page_size=10):
         return Object(**self._call('zed_indices.json', {
             'api_key': self.api_key,
@@ -101,6 +108,14 @@ class ZooplaTests(unittest.TestCase):
         zed = self.zoopla.zed_index('SW11')
         country = zed.country
         self.assertEqual(country, 'England')
+    
+    def test_area_zed_indices(self):
+        a = self.zoopla.area_zed_indices(area='Blackley, Greater Manchester')
+        self.assertEqual(a.town, 'Manchester')
+
+    def test_auto_complete(self):
+        a = self.zoopla.auto_complete('SW')
+        self.assertEqual(a.suggestions[0]['value'], 'SW1A 0PW')
 
 
 class ZooplaException(Exception):
