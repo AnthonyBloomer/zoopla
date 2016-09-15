@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Zoopla by AnthonyBloomer</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Zoopla</h1>
+        <p>A python wrapper for the Zoopla API.</p>
+
+        <p class="view"><a href="https://github.com/AnthonyBloomer/zoopla">View the Project on GitHub <small>AnthonyBloomer/zoopla</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/AnthonyBloomer/zoopla/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/AnthonyBloomer/zoopla/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/AnthonyBloomer/zoopla">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="zoopla" class="anchor" href="#zoopla" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>zoopla</h1>
+
+<p>A python wrapper for the Zoopla API.</p>
+
+<p>Zoopla has launched an open API to allow developers to create applications using hyper local data on 27m homes, over 1m sale and rental listings, and 15 years of sold price data.</p>
+
+<p><a href="http://developer.zoopla.com/member/register/">Register</a> for a user account and <a href="http://developer.zoopla.com/member/register/">apply</a> for an instant API key.</p>
+
+<p>Browse the <a href="http://developer.zoopla.com/docs/">documentation</a> to understand how to use the API and the specifications for the individual APIs.</p>
+
+<h2>
+<a id="examples" class="anchor" href="#examples" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Examples</h2>
+
+<p>Retrieve property listings for a given area.</p>
+
+<div class="highlight highlight-source-python"><pre>zoopla <span class="pl-k">=</span> Zoopla(<span class="pl-s"><span class="pl-pds">'</span>your_api_key<span class="pl-pds">'</span></span>)
+
+search <span class="pl-k">=</span> zoopla.search_property_listings(<span class="pl-v">params</span><span class="pl-k">=</span>{
+    <span class="pl-s"><span class="pl-pds">'</span>maximum_beds<span class="pl-pds">'</span></span>: <span class="pl-c1">2</span>,
+    <span class="pl-s"><span class="pl-pds">'</span>page_size<span class="pl-pds">'</span></span>: <span class="pl-c1">100</span>,
+    <span class="pl-s"><span class="pl-pds">'</span>listing_status<span class="pl-pds">'</span></span>: <span class="pl-s"><span class="pl-pds">'</span>sale<span class="pl-pds">'</span></span>,
+    <span class="pl-s"><span class="pl-pds">'</span>area<span class="pl-pds">'</span></span>: <span class="pl-s"><span class="pl-pds">'</span>Blackley, Greater Manchester<span class="pl-pds">'</span></span>
+})
+
+<span class="pl-k">for</span> result <span class="pl-k">in</span> search:
+    <span class="pl-c1">print</span> result.price
+    <span class="pl-c1">print</span> result.description
+    <span class="pl-c1">print</span> result.image_url
+</pre></div>
+
+<p>Generate a graph of values for an outcode over the previous 3 months and return the URL to the generated image.</p>
+
+<div class="highlight highlight-source-python"><pre>area_graphs <span class="pl-k">=</span> zoopla.area_value_graphs(<span class="pl-s"><span class="pl-pds">'</span>SW11<span class="pl-pds">'</span></span>)
+
+<span class="pl-c1">print</span> area_graphs.average_values_graph_url
+<span class="pl-c1">print</span> area_graphs.value_trend_graph_url
+</pre></div>
+
+<p>Retrieve the average sale price for houses in a particular area.</p>
+
+<div class="highlight highlight-source-python"><pre>average <span class="pl-k">=</span> zoopla.get_average_area_sold_price(<span class="pl-s"><span class="pl-pds">'</span>SW11<span class="pl-pds">'</span></span>)
+<span class="pl-c1">print</span> average.average_sold_price_7year
+<span class="pl-c1">print</span> average.average_sold_price_5year</pre></div>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/AnthonyBloomer">AnthonyBloomer</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
