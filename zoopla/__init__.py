@@ -12,43 +12,25 @@ class Zoopla:
         self.url = 'http://api.zoopla.co.uk/api/v1/'
         self.api_key = api_key
     
-    '''
-    Description: Generate a set of graphs of local info for an outcode (and optional incode) and return the URL to the generated image.
-    Access URI: http://api.zoopla.co.uk/api/v1/local_info_graphs
-    '''
     def local_info_graphs(self, area):
         return Object(**self._call('local_info_graphs.js', {
             'api_key': self.api_key,
             'area': area
         }))
     
-    '''
-    Description: Retrieve the Zoopla.co.uk Zed-Index! for a requested area.
-    Access URI: http://api.zoopla.co.uk/api/v1/zed_index
-    '''
     def zed_index(self, area, output_type='outcode'):
         return Object(**self._call('zed_index.js?', {
             'api_key': self.api_key,
             'area': area,
             'output_type': output_type
         }))
-    
-    
-    '''
-    Description: Generate a graph of values for an outcode over the previous 3 months and return the URL to the generated image.
-    Access URI: http://api.zoopla.co.uk/api/v1/area_value_graphs
-    '''
+
     def area_value_graphs(self, area, size='medium'):
         return Object(**self._call('area_value_graphs.js?', {
             'api_key': self.api_key,
             'area': area,
             'size': size
         }))
-        
-    '''
-    Description: Retrieve property listings for a given area.
-    Access URI: http://api.zoopla.co.uk/api/v1/property_listings
-    '''
 
     def search_property_listings(self, params):
         params.update({'api_key': self.api_key})
@@ -57,10 +39,6 @@ class Zoopla:
         [result.append(Object(**r)) for r in c['listing']]
         return result
     
-    '''
-    Description: Retrieve the average sale price for houses in a particular area.
-    Access URI: http://api.zoopla.co.uk/api/v1/average_area_sold_price
-    '''
     def get_average_area_sold_price(self, area=None, postcode=None, output_type='outcode', area_type='streets'):
         return Object(**self._call('average_area_sold_price.json?', {
             'api_key': self.api_key,
@@ -69,7 +47,19 @@ class Zoopla:
             'output_type': output_type,
             'area_type': area_type
         }))
+    
+    def area_zed_indices(self, area, area_type='streets', output_type='area', order='ascending', page_number=1, page_size=10):
+        return Object(**self._call('zed_indices.json', {
+            'api_key': self.api_key,
+            'area': area,
+            'output_type': output_type,
+            'area_type': area_type,
+            'order': order,
+            'page_number': page_number,
+            'page_size': page_size
 
+        }))
+        
     def _call(self, action, params):
         r = requests.get(self.url + action, params)
         if r.status_code == 200:
