@@ -8,5 +8,7 @@ setup(name='zoopla',
       author_email='ant0@protonmail.ch',
       license='MIT',
       packages=['zoopla'],
-
+      install_requires=[
+            'requests',
+      ],
       zip_safe=False)
