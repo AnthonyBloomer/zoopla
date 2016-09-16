@@ -7,12 +7,13 @@ class Object:
 
 
 class Zoopla:
-    def __init__(self, api_key):
+    def __init__(self, api_key, debug=False):
+        self.debug = debug
         self.url = 'http://api.zoopla.co.uk/api/v1/'
         self.api_key = api_key
 
     def local_info_graphs(self, area):
-        return Object(**self._call('local_info_graphs.json?', {
+        return Object(**self._call('local_info_graphs.js', {
             'api_key': self.api_key,
             'area': area
         }))
@@ -77,7 +78,8 @@ class Zoopla:
     def _call(self, action, params):
         r = requests.get(self.url + action, params)
         if r.status_code == 200:
-            print r.json()
+            if self.debug:
+                print r.json()
             return r.json()
         else:
             raise ZooplaException(str(r.status_code), r.reason, r.text)
