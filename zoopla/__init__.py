@@ -12,7 +12,7 @@ class Zoopla:
         self.api_key = api_key
 
     def local_info_graphs(self, area):
-        return Object(**self._call('local_info_graphs.js', {
+        return Object(**self._call('local_info_graphs.json?', {
             'api_key': self.api_key,
             'area': area
         }))
