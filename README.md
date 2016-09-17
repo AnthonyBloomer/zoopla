@@ -17,7 +17,7 @@ pip install zoopla
 Retrieve property listings for a given area.
 ```python
 from zoopla import Zoopla
-zoopla = Zoopla('your_api_key')
+zoopla = Zoopla(api_key='your_api_key', debug=True)
 
 search = zoopla.search_property_listings(params={
     'maximum_beds': 2,
