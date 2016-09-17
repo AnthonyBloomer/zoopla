@@ -40,11 +40,18 @@
 <p>Browse the <a href="http://developer.zoopla.com/docs/">documentation</a> to understand how to use the API and the specifications for the individual APIs.</p>
 
 <h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h2>
+
+<pre><code>pip install zoopla
+</code></pre>
+
+<h2>
 <a id="examples" class="anchor" href="#examples" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Examples</h2>
 
 <p>Retrieve property listings for a given area.</p>
 
-<div class="highlight highlight-source-python"><pre>zoopla <span class="pl-k">=</span> Zoopla(<span class="pl-s"><span class="pl-pds">'</span>your_api_key<span class="pl-pds">'</span></span>)
+<div class="highlight highlight-source-python"><pre><span class="pl-k">from</span> zoopla <span class="pl-k">import</span> Zoopla
+zoopla <span class="pl-k">=</span> Zoopla(<span class="pl-v">api_key</span><span class="pl-k">=</span><span class="pl-s"><span class="pl-pds">'</span>your_api_key<span class="pl-pds">'</span></span>, <span class="pl-v">debug</span><span class="pl-k">=</span><span class="pl-c1">True</span>, <span class="pl-v">wait_on_rate_limit</span><span class="pl-k">=</span><span class="pl-c1">True</span>)
 
 search <span class="pl-k">=</span> zoopla.search_property_listings(<span class="pl-v">params</span><span class="pl-k">=</span>{
     <span class="pl-s"><span class="pl-pds">'</span>maximum_beds<span class="pl-pds">'</span></span>: <span class="pl-c1">2</span>,
