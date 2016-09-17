@@ -7,10 +7,16 @@ Zoopla has launched an open API to allow developers to create applications using
 
 Browse the [documentation](http://developer.zoopla.com/docs/) to understand how to use the API and the specifications for the individual APIs.
 
+## Installation
+```
+pip install zoopla
+```
+
 ## Examples
 
 Retrieve property listings for a given area.
 ```python
+from zoopla import Zoopla
 zoopla = Zoopla('your_api_key')
 
 search = zoopla.search_property_listings(params={
