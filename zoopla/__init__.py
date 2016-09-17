@@ -1,4 +1,5 @@
 import requests
+import time
 
 
 class Object:
@@ -7,10 +8,11 @@ class Object:
 
 
 class Zoopla:
-    def __init__(self, api_key, debug=False):
+    def __init__(self, api_key, debug=False, wait_on_rate_limit=False):
         self.debug = debug
         self.url = 'http://api.zoopla.co.uk/api/v1/'
         self.api_key = api_key
+        self.wait_on_rate_limit = wait_on_rate_limit
 
     def local_info_graphs(self, area):
         return Object(**self._call('local_info_graphs.js', {
@@ -77,12 +79,20 @@ class Zoopla:
 
     def _call(self, action, params):
         r = requests.get(self.url + action, params)
+        
         if r.status_code == 200:
+
             if self.debug:
                 print r.json()
+
             return r.json()
         else:
-            raise ZooplaException(str(r.status_code), r.reason, r.text)
+            if r.status_code == 403 and self.wait_on_rate_limit:
+                print('Rate limit reached.')
+                time.sleep(60 * 60 + 5)
+                self._call(self.url + action, params)
+            else:
+                raise ZooplaException(str(r.status_code), r.reason, r.text)
 
 
 class ZooplaException(Exception):
