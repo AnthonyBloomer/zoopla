@@ -89,7 +89,7 @@ class Zoopla:
         else:
             if r.status_code == 403 and self.wait_on_rate_limit:
                 print('Rate limit reached.')
-                time.sleep(60 * 60 + 5)
+                time.sleep(3605)
                 self._call(self.url + action, params)
             else:
                 raise ZooplaException(str(r.status_code), r.reason, r.text)
