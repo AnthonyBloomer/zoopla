@@ -12,7 +12,7 @@ class Zoopla:
         """
         :param api_key: Zoopla API Key
         :param debug: When set to true, we output the JSON response and URI.
-        :param wait_on_rate_limit:
+        :param wait_on_rate_limit: When the rate limit is reached, we sleep for 1 hour before making a call to the API again.
         """
         self.debug = debug
         self.url = 'http://api.zoopla.co.uk/api/v1/'
