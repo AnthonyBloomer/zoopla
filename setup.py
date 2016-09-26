@@ -1,7 +1,7 @@
 from setuptools import setup
 
 setup(name='zoopla',
-      version='0.2',
+      version='0.3',
       description='A simple wrapper for the Zoopla API',
       url='https://github.com/AnthonyBloomer/zoopla',
       author='Anthony Bloomer',
