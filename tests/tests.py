@@ -43,3 +43,5 @@ class ZooplaTests(unittest.TestCase):
     def test_auto_complete(self):
         a = self.zoopla.auto_complete('SW')
         self.assertEqual(a.suggestions[0]['value'], 'SW1A 0PW')
+
+
