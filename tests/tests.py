@@ -4,7 +4,7 @@ from zoopla import Zoopla
 
 class ZooplaTests(unittest.TestCase):
     def setUp(self):
-        self.zoopla = Zoopla('')
+        self.zoopla = Zoopla('', debug=True)
 
     def test_area_value_graphs(self):
         area_graphs = self.zoopla.area_value_graphs('SW11')
@@ -12,7 +12,7 @@ class ZooplaTests(unittest.TestCase):
         self.assertEquals(area_name.strip(), 'SW11')
 
     def test_get_average_area_sold_price(self):
-        averages = self.zoopla.get_average_area_sold_price('SW11')
+        averages = self.zoopla.get_average_area_sold_price(area='SW11')
         self.assertEqual(averages.area_name.strip(), 'SW11')
 
     def test_search_property_listings(self):
