@@ -15,6 +15,7 @@ pip install zoopla
 ## Examples
 
 Retrieve property listings for a given area.
+
 ```python
 from zoopla import Zoopla
 zoopla = Zoopla(api_key='your_api_key', debug=True, wait_on_rate_limit=True)
