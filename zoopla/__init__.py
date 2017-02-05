@@ -55,7 +55,6 @@ class Zoopla:
         }))
 
     def area_zed_indices(self, params):
-
         return Object(**self._call('zed_indices.json', params))
 
     def _call(self, action, params=None):
@@ -67,6 +66,7 @@ class Zoopla:
                 print(r.url)
             return r.json()
         else:
+            print(r.status_code)
             if self.debug:
                 print(r.json())
                 print(r.url)
@@ -85,4 +85,4 @@ class ZooplaException(Exception):
         self.text = text
 
     def __str__(self):
-        return "Zoopla returned an error: " + str(self.status_code) + " - " + self.reason + " - " + self.text
+        return "Zoopla returned an error: %s - %s - %s" % (str(self.status_code), self.reason, self.text)
