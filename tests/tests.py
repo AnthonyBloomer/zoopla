@@ -1,6 +1,6 @@
 import unittest
 from zoopla import Zoopla
-
+import pprint
 
 class ZooplaTests(unittest.TestCase):
     def setUp(self):
@@ -12,7 +12,10 @@ class ZooplaTests(unittest.TestCase):
         self.assertEquals(area_name.strip(), 'SW11')
 
     def test_get_average_area_sold_price(self):
-        averages = self.zoopla.get_average_area_sold_price(area='SW11')
+        averages = self.zoopla.get_average_area_sold_price({
+            'postcode': 'SW11',
+            'output_type':'outcode'
+        })
         self.assertEqual(averages.area_name.strip(), 'SW11')
 
     def test_search_property_listings(self):
@@ -37,11 +40,16 @@ class ZooplaTests(unittest.TestCase):
         self.assertEqual(country, 'England')
 
     def test_area_zed_indices(self):
-        a = self.zoopla.area_zed_indices(area='Blackley, Greater Manchester')
+        a = self.zoopla.area_zed_indices({
+            'area': 'Blackley, Greater Manchester',
+            'output_type': 'area',
+            'area_type': 'streets',
+            'order': 'ascending',
+            'page_number': 1,
+            'page_size': 10
+        })
         self.assertEqual(a.town, 'Manchester')
 
     def test_auto_complete(self):
         a = self.zoopla.auto_complete('SW')
         self.assertEqual(a.suggestions[0]['value'], 'SW1A 0PW')
-
-
