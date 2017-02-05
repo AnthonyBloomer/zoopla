@@ -16,60 +16,36 @@ class Zoopla:
 
     def local_info_graphs(self, area):
         return Object(**self._call('local_info_graphs.js', {
-            'api_key': self.api_key,
             'area': area
         }))
 
     def get_session_id(self):
-        response = self._call('get_session_id.json?', {
-            'api_key': self.api_key
-        })
-
+        response = self._call('get_session_id.json?')
         return response['session_id']
 
     def zed_index(self, area, output_type='outcode'):
         return Object(**self._call('zed_index.json?', {
-            'api_key': self.api_key,
             'area': area,
             'output_type': output_type
         }))
 
     def area_value_graphs(self, area, size='medium'):
         return Object(**self._call('area_value_graphs.json?', {
-            'api_key': self.api_key,
             'area': area,
             'size': size
         }))
 
     def search_property_listings(self, params):
-        params.update({'api_key': self.api_key})
         c = self._call('property_listings.json?', params)
         result = []
         [result.append(Object(**r)) for r in c['listing']]
         return result
 
-    def average_sold_prices(self, postcode, output_type='county', area_type='streets', page_number=1, page_size=100,
-                            ordering='descending'):
-        return Object(**self._call('average_sold_prices.json?', {
-            'api_key': self.api_key,
-            'postcode': postcode,
-            'output_type': output_type,
-            'area_type': area_type,
-            'page_number': page_number,
-            'page_size': page_size,
-            'ordering': ordering
-        }))
+    def average_sold_prices(self, params):
+        return Object(**self._call('average_sold_prices.json?', params))
 
-    def get_average_area_sold_price(self, county=None, area=None, postcode=None, output_type='outcode',
-                                    area_type='streets'):
-        return Object(**self._call('average_area_sold_price.json?', {
-            'api_key': self.api_key,
-            'postcode': postcode,
-            'county': county,
-            'area': area,
-            'output_type': output_type,
-            'area_type': area_type
-        }))
+    def get_average_area_sold_price(self, params):
+        return Object(**self._call('average_area_sold_price.json?', params))
 
     def auto_complete(self, search_term, search_type='properties'):
         return Object(**self._call('geo_autocomplete.json?', {
@@ -78,30 +54,22 @@ class Zoopla:
             'search_type': search_type
         }))
 
-    def area_zed_indices(self, area, area_type='streets', output_type='area', order='ascending', page_number=1,
-                         page_size=10):
-        return Object(**self._call('zed_indices.json', {
-            'api_key': self.api_key,
-            'area': area,
-            'output_type': output_type,
-            'area_type': area_type,
-            'order': order,
-            'page_number': page_number,
-            'page_size': page_size
+    def area_zed_indices(self, params):
 
-        }))
+        return Object(**self._call('zed_indices.json', params))
 
-    def _call(self, action, params):
+    def _call(self, action, params=None):
+        params.update({'api_key': self.api_key})
         r = requests.get(self.url + action, params)
         if r.status_code == 200:
             if self.debug:
-                print r.url
-                print r.json()
+                print(r.json())
+                print(r.url)
             return r.json()
         else:
             if self.debug:
-                print r.url
-                print r.json()
+                print(r.json())
+                print(r.url)
             if r.status_code == 403 and self.wait_on_rate_limit:
                 print('Rate limit reached. Sleeping for 1 hour.')
                 time.sleep(3605)
