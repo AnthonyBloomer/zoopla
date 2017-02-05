@@ -15,7 +15,6 @@ pip install zoopla
 ## Examples
 
 Retrieve property listings for a given area.
-
 ```python
 from zoopla import Zoopla
 zoopla = Zoopla(api_key='your_api_key', debug=True, wait_on_rate_limit=True)
@@ -33,6 +32,23 @@ for result in search:
     print result.image_url
   
 ```
+
+Retrieve a list of house price estimates for the requested area.
+
+```python
+zed_indices = zoopla.area_zed_indices({
+    'area': 'Blackley, Greater Manchester',
+    'output_type': 'area',
+    'area_type': 'streets',
+    'order': 'ascending',
+    'page_number': 1,
+    'page_size': 10
+})
+
+print zed_indices.town
+print zed_indices.results_url
+```
+
 
 Generate a graph of values for an outcode over the previous 3 months and return the URL to the generated image.
 
