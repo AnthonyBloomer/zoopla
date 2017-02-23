@@ -4,7 +4,7 @@ from zoopla import Zoopla
 
 class ZooplaTests(unittest.TestCase):
     def setUp(self):
-        self.zoopla = Zoopla('xpgt8ddphbzgj3w6nx5kb69m', debug=True)
+        self.zoopla = Zoopla('', debug=True)
 
     def test_area_value_graphs(self):
         area_graphs = self.zoopla.area_value_graphs('SW11')
