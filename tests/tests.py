@@ -1,10 +1,10 @@
 import unittest
 from zoopla import Zoopla
-import pprint
+
 
 class ZooplaTests(unittest.TestCase):
     def setUp(self):
-        self.zoopla = Zoopla('', debug=True)
+        self.zoopla = Zoopla('xpgt8ddphbzgj3w6nx5kb69m', debug=True)
 
     def test_area_value_graphs(self):
         area_graphs = self.zoopla.area_value_graphs('SW11')
@@ -14,7 +14,7 @@ class ZooplaTests(unittest.TestCase):
     def test_get_average_area_sold_price(self):
         averages = self.zoopla.get_average_area_sold_price({
             'postcode': 'SW11',
-            'output_type':'outcode'
+            'output_type': 'outcode'
         })
         self.assertEqual(averages.area_name.strip(), 'SW11')
 
