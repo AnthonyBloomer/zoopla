@@ -1,6 +1,6 @@
 title: Zoopla
 description: A python wrapper for the Zoopla API.
-google_analytics: 
+google_analytics: ['UA-83559405-3', 'auto']
 show_downloads: true
 theme: jekyll-theme-midnight
 
