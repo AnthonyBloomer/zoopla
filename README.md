@@ -12,14 +12,29 @@ Browse the [documentation](http://developer.zoopla.com/docs/) to understand how 
 pip install zoopla
 ```
 
+## Tests
+
+Install the dev requirements:
+
+```sh
+pip install -r dev-requirements.txt
+```
+
+Run py.test with your developer key (otherwise you won't be able to hit the live
+API upon which these tests depend).
+
+```sh
+py.test --api-key=<you-api-key> tests/
+```
+
 ## Examples
 
 Retrieve property listings for a given area.
 ```python
 from zoopla import Zoopla
-zoopla = Zoopla(api_key='your_api_key', debug=True, wait_on_rate_limit=True)
+zoopla = Zoopla(api_key='your_api_key')
 
-search = zoopla.search_property_listings(params={
+search = zoopla.property_listings({
     'maximum_beds': 2,
     'page_size': 100,
     'listing_status': 'sale',
@@ -53,7 +68,7 @@ print zed_indices.results_url
 Generate a graph of values for an outcode over the previous 3 months and return the URL to the generated image.
 
 ```python
-area_graphs = zoopla.area_value_graphs('SW11')
+area_graphs = zoopla.area_value_graphs({'area': 'SW11'})
 
 print area_graphs.average_values_graph_url
 print area_graphs.value_trend_graph_url
@@ -63,7 +78,7 @@ print area_graphs.value_trend_graph_url
 Retrieve the average sale price for houses in a particular area.
 
 ```python
-average = zoopla.get_average_area_sold_price('SW11')
+average = zoopla.get_average_area_sold_price({'area': 'SW11'})
 print average.average_sold_price_7year
 print average.average_sold_price_5year
 ```

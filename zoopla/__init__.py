@@ -1,1 +1,1 @@
-from zoopla import Zoopla
+from api import Zoopla
