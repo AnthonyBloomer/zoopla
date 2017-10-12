@@ -44,6 +44,7 @@ Retrieve property listings for a given area.
 .. code:: python
 
     from zoopla import Zoopla
+
     zoopla = Zoopla(api_key='your_api_key')
 
     search = zoopla.property_listings({
@@ -53,10 +54,10 @@ Retrieve property listings for a given area.
         'area': 'Blackley, Greater Manchester'
     })
 
-    for result in search:
-        print result.price
-        print result.description
-        print result.image_url
+    for result in search.listing:
+        print(result.price)
+        print(result.description)
+        print(result.image_url)
 
 
 Retrieve a list of house price estimates for the requested area.
@@ -72,8 +73,8 @@ Retrieve a list of house price estimates for the requested area.
         'page_size': 10
     })
 
-    print zed_indices.town
-    print zed_indices.results_url
+    print(zed_indices.town)
+    print(zed_indices.results_url)
 
 Generate a graph of values for an outcode over the previous 3 months and
 return the URL to the generated image.
@@ -82,16 +83,17 @@ return the URL to the generated image.
 
     area_graphs = zoopla.area_value_graphs({'area': 'SW11'})
 
-    print area_graphs.average_values_graph_url
-    print area_graphs.value_trend_graph_url
+    print(area_graphs.average_values_graph_url)
+    print(area_graphs.value_trend_graph_url)
 
 Retrieve the average sale price for houses in a particular area.
 
 .. code:: python
 
-    average = zoopla.get_average_area_sold_price({'area': 'SW11'})
-    print average.average_sold_price_7year
-    print average.average_sold_price_5year
+    average = zoopla.average_area_sold_price({'area': 'SW11'})
+
+    print(average.average_sold_price_7year)
+    print(average.average_sold_price_5year)
 
 .. _Register: http://developer.zoopla.com/member/register/
 .. _documentation: http://developer.zoopla.com/docs/
