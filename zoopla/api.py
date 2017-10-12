@@ -4,7 +4,7 @@ import requests
 
 from .exceptions import (
     ZooplaAPIException, ResponseFormatException, RequestFormatException)
-from schemas import (
+from .schemas import (
     PropertyListingResultSchema, LocalInfoGraphsResultSchema, ZedIndexResultSchema,
     AreaZedIndicesResultSchema, AutoCompleteResultSchema,
     AreaValueGraphsResultSchema,

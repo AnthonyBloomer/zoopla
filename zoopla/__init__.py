@@ -1,1 +1,1 @@
-from api import Zoopla
+from .api import Zoopla

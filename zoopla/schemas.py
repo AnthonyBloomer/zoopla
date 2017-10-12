@@ -1,6 +1,6 @@
 from marshmallow import Schema, fields, validates
 from marshmallow.validate import OneOf
-from fields import StrippedString
+from .fields import StrippedString
 
 
 class AttributeDict(dict):
