@@ -34,7 +34,7 @@ Install the dev requirements:
 
 .. code:: sh
 
-    $ py.test --api-key=<you-api-key> tests/ # pytest under Python 3+
+    $ py.test --api_key=<your-api-key> tests/ # pytest under Python 3+
 
 Examples
 --------
