@@ -26,7 +26,7 @@ Install the dev requirements:
 
 .. code:: sh
 
-    $ pip install -r dev-requirements.txt
+    $ pip install -r requirements.txt
 
 | Run py.test with your developer key (otherwise you won’t be able to
   hit the live
