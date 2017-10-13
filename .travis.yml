@@ -10,4 +10,4 @@ install:
 
 # command to run tests
 script:
-  - if [[$TRAVIS_PYTHON_VERSION == 2.7]]; then py.test api_key=$api_key else pytest api_key=$api_key fi
+  - pytest api_key=$api_key
