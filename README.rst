@@ -17,7 +17,7 @@ Installation
 
 ::
 
-    pip install zoopla
+    $ pip install zoopla
 
 Tests
 -----
@@ -26,7 +26,7 @@ Install the dev requirements:
 
 .. code:: sh
 
-    pip install -r dev-requirements.txt
+    $ pip install -r dev-requirements.txt
 
 | Run py.test with your developer key (otherwise you won’t be able to
   hit the live
@@ -34,7 +34,7 @@ Install the dev requirements:
 
 .. code:: sh
 
-    py.test --api-key=<you-api-key> tests/
+    $ py.test --api-key=<you-api-key> tests/ # pytest under Python 3+
 
 Examples
 --------
