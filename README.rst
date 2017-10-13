@@ -1,6 +1,8 @@
 zoopla
 ======
 
+|Build Status|
+
 A python wrapper for the Zoopla API.
 
 Zoopla has launched an open API to allow developers to create
@@ -97,3 +99,7 @@ Retrieve the average sale price for houses in a particular area.
 
 .. _Register: http://developer.zoopla.com/member/register/
 .. _documentation: http://developer.zoopla.com/docs/
+
+
+.. |Build Status| image:: https://travis-ci.org/AnthonyBloomer/zoopla.svg?branch=master
+   :target: https://travis-ci.org/AnthonyBloomer/zoopla
