@@ -127,10 +127,10 @@ class Zoopla(object):
         Retrieve property listings for a given area.
         """
         return self._base_call(
-            'property_listings.json',
-            SearchPropertyListingRequestSchema,
-            PropertyListingResultSchema,
-            params
+            action='property_listings.json',
+            request_schema=SearchPropertyListingRequestSchema,
+            result_schema=PropertyListingResultSchema,
+            parameters=params
         )
 
     def refine_estimate(self, params):
@@ -139,10 +139,10 @@ class Zoopla(object):
         based on extra data provided.
         """
         return self._base_call(
-            'refine_estimate.json',
-            RefineEstimateSchema,
-            RefineEstimateResultSchema,
-            params
+            action='refine_estimate.json',
+            request_schema=RefineEstimateSchema,
+            result_schema=RefineEstimateResultSchema,
+            parameters=params
         )
 
     def arrange_viewing(self, params):
@@ -150,10 +150,10 @@ class Zoopla(object):
         Submit a viewing request to an agent regarding a particular listing.
         """
         return self._base_call(
-            'arrange_viewing.json',
-            ArrangeViewingSchema,
-            ArrangeViewingResultSchema,
-            params
+            action='arrange_viewing.json',
+            request_schema=ArrangeViewingSchema,
+            result_schema=ArrangeViewingResultSchema,
+            parameters=params
         )
 
     def get_session_id(self):
