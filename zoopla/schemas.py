@@ -81,6 +81,8 @@ class PropertyListingSchema(BaseSchema):
 
     listing_id = fields.String()
     listing_status = fields.String()
+    
+    price = fields.String()
 
     agent_address = fields.String()
     agent_logo = fields.URL()
