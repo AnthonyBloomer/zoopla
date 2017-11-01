@@ -81,7 +81,7 @@ class PropertyListingSchema(BaseSchema):
 
     listing_id = fields.String()
     listing_status = fields.String()
-    
+
     price = fields.String()
 
     agent_address = fields.String()
@@ -222,3 +222,64 @@ class AverageSoldPriceRequestSchema(BaseRequestSchema):
 class AverageSoldPricesBaseResultSchema(BaseResultSchema):
     result_count = fields.Integer()
     result = fields.Nested(AverageAreaSoldPriceResultSchema, many=True)
+
+
+class RefineEstimateSchema(BaseSchema):
+    property_id = fields.Integer()
+    property_type = fields.String(validate=OneOf(choices=(
+        'detached',
+        'link_detached',
+        'semi_detached',
+        'terraced',
+        'flat',
+        'end_terrace',
+        'maisonette',
+        'mews',
+        'town_house',
+        'cottage',
+        'bungalow',
+        'farm_barn',
+        'park_home'
+    )))
+    tenure = fields.String(validate=OneOf(choices=(
+        'freehold',
+        'leasehold',
+        'share_of_freehold'
+    )))
+    num_bedrooms = fields.Integer()
+    num_bathrooms = fields.Integer()
+    num_receptions = fields.Integer()
+    session_id = fields.String()
+
+
+class RefineEstimateResultSchema(BaseSchema):
+    estimate = fields.String()
+    upper_estimate = fields.String()
+    lower_estimate = fields.String()
+    confidence = fields.Integer()
+
+
+class ArrangeViewingSchema(BaseSchema):
+    session_id = fields.String()
+    message = fields.String()
+    best_time_to_call = fields.String(validate=OneOf(choices=(
+        'anytime',
+        'afternoon',
+        'evening',
+        'morning'
+    )))
+    phone_type = fields.String(validate=OneOf(choices=(
+        'mobile',
+        'work',
+        'home',
+        'morning'
+    )))
+    phone = fields.String()
+    email = fields.Email()
+    name = fields.String()
+    listing_id = fields.Integer()
+
+
+class ArrangeViewingResultSchema(BaseSchema):
+    success = fields.Integer()
+    error = fields.String()

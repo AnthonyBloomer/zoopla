@@ -11,8 +11,9 @@ from .schemas import (
     AverageSoldPricesBaseResultSchema, AverageAreaSoldPriceResultSchema,
     BaseRequestSchema, SearchPropertyListingRequestSchema, ZedIndexRequestSchema,
     AreaZedIndicesRequestSchema, AutocompleteRequestSchema,
-    AreaValueGraphsRequestSchema, AverageSoldPriceRequestSchema)
-
+    AreaValueGraphsRequestSchema, AverageSoldPriceRequestSchema, RefineEstimateSchema, RefineEstimateResultSchema,
+    ArrangeViewingSchema, ArrangeViewingResultSchema
+)
 
 logging.basicConfig()
 logger = logging.getLogger(__file__)
@@ -137,13 +138,23 @@ class Zoopla(object):
         Request a more accurate Zoopla.co.uk Zed-Index
         based on extra data provided.
         """
-        raise NotImplementedError
+        return self._base_call(
+            'refine_estimate.json',
+            RefineEstimateSchema,
+            RefineEstimateResultSchema,
+            params
+        )
 
     def arrange_viewing(self, params):
         """
         Submit a viewing request to an agent regarding a particular listing.
         """
-        raise NotImplementedError
+        return self._base_call(
+            'arrange_viewing.json',
+            ArrangeViewingSchema,
+            ArrangeViewingResultSchema,
+            params
+        )
 
     def get_session_id(self):
         """
