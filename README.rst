@@ -97,6 +97,25 @@ Retrieve the average sale price for houses in a particular area.
     print(average.average_sold_price_7year)
     print(average.average_sold_price_5year)
 
+
+Submit a viewing request to an agent regarding a particular listing.
+ 
+.. code:: python
+
+    session_id = zoopla.get_session_id()
+
+    arrange_viewing = zoopla.arrange_viewing({
+        'session_id': session_id,
+        'listing_id': 44863256,
+        'name': 'Tester',
+        'email': "zoopla_developer@mashery.com",
+        'phone': '01010101',
+        'phone_type': 'work',
+        'best_time_to_call': 'anytime',
+        'message': 'Hi, I seen your listing on zoopla.co.uk and I would love to arrange a viewing!'
+
+    })
+
 .. _Register: http://developer.zoopla.com/member/register/
 .. _documentation: http://developer.zoopla.com/docs/
 
