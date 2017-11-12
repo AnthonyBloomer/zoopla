@@ -1,4 +1,4 @@
-from marshmallow import Schema, fields, validates
+from marshmallow import Schema, fields, validates, post_dump, missing
 from marshmallow.validate import OneOf
 from .fields import StrippedString
 
@@ -10,6 +10,19 @@ class AttributeDict(dict):
 
 
 class BaseSchema(Schema):
+    
+    def on_bind_field(self, field_name, field_obj):
+        if field_obj.missing == missing:
+            field_obj.missing = None
+            field_obj.allow_none = True
+
+    @post_dump
+    def clean_missing(self, data):
+        ret = data.copy()
+        for key in filter(lambda key: data[key] is None, data):
+            del ret[key]
+        return ret
+
     @property
     def dict_class(self):
         return AttributeDict
@@ -82,7 +95,7 @@ class PropertyListingSchema(BaseSchema):
     listing_id = fields.String()
     listing_status = fields.String()
 
-    price = fields.String()
+    price = fields.Float()
 
     agent_address = fields.String()
     agent_logo = fields.URL()
