@@ -45,7 +45,7 @@ class PublishCommand(Command):
 
 
 setup(name='zoopla',
-      version='0.6.1',
+      version='0.6.2',
       description='A Python wrapper for the Zoopla API',
       long_description=long_descr,
       url='https://github.com/anthonybloomer/zoopla',

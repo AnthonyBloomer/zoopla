@@ -85,7 +85,8 @@ class SearchPropertyListingRequestSchema(BaseRequestSchema):
 
     @validates('radius')
     def validate_radius(self, value):
-        return 0.1 < value < 40
+        if value is not None:
+            return 0.1 < value < 40 
 
 
 class PropertyListingSchema(BaseSchema):
