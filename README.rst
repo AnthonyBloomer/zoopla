@@ -115,6 +115,15 @@ Submit a viewing request to an agent regarding a particular listing.
         'message': 'Hi, I seen your listing on zoopla.co.uk and I would love to arrange a viewing!'
 
     })
+    
+Contributing
+------------
+
+- Fork the project and clone locally.
+- Create a new branch for what you're going to work on. 
+- Push to your origin repository.
+- Include tests and update documentation if necessary.
+- Create a new pull request in GitHub.
 
 .. _Register: http://developer.zoopla.com/member/register/
 .. _documentation: http://developer.zoopla.com/docs/
