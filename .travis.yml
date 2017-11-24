@@ -11,7 +11,5 @@ install:
 
 # command to run tests
 script:
-  - pytest --api_key=$api_key --cov=./
+  - pytest --api_key=$api_key --cov=./ --cov-report
   
-after_success:
-  - codecov --token=$codecov_key
