@@ -14,4 +14,4 @@ script:
   - pytest --api_key=$api_key --cov=./
   
 after_success:
-  - codecov
+  - codecov --token=$codecov_key
