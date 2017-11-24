@@ -1,7 +1,7 @@
 zoopla
 ======
 
-|Build Status|
+|Build Status| |codecov|
 
 A python wrapper for the Zoopla API.
 
@@ -131,3 +131,6 @@ Contributing
 
 .. |Build Status| image:: https://travis-ci.org/AnthonyBloomer/zoopla.svg?branch=master
    :target: https://travis-ci.org/AnthonyBloomer/zoopla
+   
+.. |codecov| image:: https://codecov.io/gh/AnthonyBloomer/zoopla/branch/master/graph/badge.svg
+   :target: https://codecov.io/gh/AnthonyBloomer/zoopla
