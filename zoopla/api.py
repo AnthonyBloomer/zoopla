@@ -102,11 +102,13 @@ class Zoopla(object):
         Retrieve the average sale price for houses in a particular area.
         """
 
-        if params['area_type'] and not isinstance(params['area_type'], AreaType):
-            raise ZooplaAPIException('area_type should be an instance of AreaType')
+        if params['area_type']:
+            if not isinstance(params['area_type'], AreaType):
+                raise ZooplaAPIException('area_type should be an instance of AreaType')
 
-        if params['output_type'] and not isinstance(params['output_type'], OutputType):
-            raise ZooplaAPIException('output_type should be an instance of OutputType')
+        if params['output_type']:
+            if not isinstance(params['output_type'], OutputType):
+                raise ZooplaAPIException('output_type should be an instance of OutputType')
 
         params.update({
             'area_type': AreaType.STREETS if 'area_type' not in params else str(params['area_type']),
