@@ -1,6 +1,6 @@
 import pytest
 
-from zoopla.api import Zoopla
+from zoopla.api import Zoopla, AreaType, OutputType
 
 
 @pytest.fixture
@@ -22,7 +22,7 @@ def test_area_value_graphs(client):
 def test_get_average_area_sold_price(client):
     averages = client.average_area_sold_price(params={
         'postcode': 'SW11',
-        'output_type': 'outcode'
+        'output_type': OutputType.COUNTY
     })
     assert averages.area_name == 'SW11'
     assert averages.number_of_sales_7year is not None
