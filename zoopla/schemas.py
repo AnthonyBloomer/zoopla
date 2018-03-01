@@ -16,6 +16,13 @@ class BaseSchema(Schema):
             field_obj.missing = None
             field_obj.allow_none = True
 
+    @post_dump
+    def clean_missing(self, data):
+        ret = data.copy()
+        for key in filter(lambda key: data[key] is None, data):
+            del ret[key]
+            return ret
+
     @property
     def dict_class(self):
         return AttributeDict

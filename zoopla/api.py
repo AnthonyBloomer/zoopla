@@ -22,8 +22,9 @@ logger = logging.getLogger(__file__)
 class Zoopla(object):
     API_URL = 'http://api.zoopla.co.uk/api/v1/'
 
-    def __init__(self, api_key):
+    def __init__(self, api_key, verbose=False):
         self.api_key = api_key
+        self.verbose = verbose
 
     def _api_call(self, action, params=None):
         if not params:
@@ -32,8 +33,12 @@ class Zoopla(object):
         params.update({'api_key': self.api_key})
         response = requests.get(
             self.API_URL + action, params)
+        if self.verbose:
+            print(response.url)
         if response.ok:
             json = response.json()
+            if self.verbose:
+                print(json)
             if 'error_string' in json:
                 raise ZooplaAPIException(text=json['error_string'])
             return response.json()
@@ -41,7 +46,6 @@ class Zoopla(object):
             raise ZooplaAPIException(response.text)
 
     def _base_call(self, action, request_schema, result_schema, parameters):
-        parameters.update({'api_key': self.api_key})
         request_errors = request_schema().validate(parameters)
 
         if request_errors:
