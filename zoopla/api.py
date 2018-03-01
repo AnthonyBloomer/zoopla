@@ -109,8 +109,8 @@ class Zoopla(object):
             raise ZooplaAPIException('output_type should be an instance of OutputType')
 
         params.update({
-            'area_type': AreaType.STREETS if 'area_type' not in params else str(params['area_type']),
-            'output_type': AreaType.COUNTY if 'output_type' not in params else str(params['output_type'])
+            'area_type': str(AreaType.STREETS) if 'area_type' not in params else str(params['area_type']),
+            'output_type': str(AreaType.COUNTY) if 'output_type' not in params else str(params['output_type'])
 
         })
 
