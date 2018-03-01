@@ -15,6 +15,10 @@ from .schemas import (
     ArrangeViewingSchema, ArrangeViewingResultSchema
 )
 
+from .enums import AreaType, OutputType
+
+import os
+
 logging.basicConfig()
 logger = logging.getLogger(__file__)
 
@@ -34,7 +38,8 @@ class Zoopla(object):
         response = requests.get(
             self.API_URL + action, params)
         if self.verbose:
-            print(response.url)
+            print('Request: %s' % response.url)
+            print('Status Code: %s' % response.status_code)
         if response.ok:
             json = response.json()
             if self.verbose:
@@ -43,7 +48,7 @@ class Zoopla(object):
                 raise ZooplaAPIException(text=json['error_string'])
             return response.json()
         else:
-            raise ZooplaAPIException(response.text)
+            raise ZooplaAPIException(response.reason)
 
     def _base_call(self, action, request_schema, result_schema, parameters):
         request_errors = request_schema().validate(parameters)
@@ -96,11 +101,19 @@ class Zoopla(object):
         """
         Retrieve the average sale price for houses in a particular area.
         """
+
+        if params['area_type'] and not isinstance(params['area_type'], AreaType):
+            raise ZooplaAPIException('area_type should be an instance of AreaType')
+
+        if params['output_type'] and not isinstance(params['output_type'], OutputType):
+            raise ZooplaAPIException('output_type should be an instance of OutputType')
+
         params.update({
-            'area_type': 'streets' if 'area_type' not in params else params['area_type'],
-            'output_type': 'county' if 'output_type' not in params else params['output_type']
+            'area_type': AreaType.STREETS if 'area_type' not in params else str(params['area_type']),
+            'output_type': AreaType.COUNTY if 'output_type' not in params else str(params['output_type'])
 
         })
+
         return self._base_call(
             action='average_area_sold_price.json',
             request_schema=BaseRequestSchema,
