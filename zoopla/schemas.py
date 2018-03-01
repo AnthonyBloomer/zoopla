@@ -10,18 +10,11 @@ class AttributeDict(dict):
 
 
 class BaseSchema(Schema):
-    
+
     def on_bind_field(self, field_name, field_obj):
         if field_obj.missing == missing:
             field_obj.missing = None
             field_obj.allow_none = True
-
-    @post_dump
-    def clean_missing(self, data):
-        ret = data.copy()
-        for key in filter(lambda key: data[key] is None, data):
-            del ret[key]
-        return ret
 
     @property
     def dict_class(self):
@@ -49,6 +42,9 @@ class BaseRequestSchema(BaseSchema):
     lon_min = fields.String()
     lon_max = fields.String()
     output_type = fields.String()
+    area_type = fields.String(validate=OneOf(choices=(
+        'streets', 'postcodes', 'outcodes', 'areas', 'towns', 'counties'
+    )))
 
 
 class BaseResultSchema(BaseSchema):
@@ -86,7 +82,7 @@ class SearchPropertyListingRequestSchema(BaseRequestSchema):
     @validates('radius')
     def validate_radius(self, value):
         if value is not None:
-            return 0.1 < value < 40 
+            return 0.1 < value < 40
 
 
 class PropertyListingSchema(BaseSchema):

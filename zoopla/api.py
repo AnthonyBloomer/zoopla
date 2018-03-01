@@ -32,16 +32,16 @@ class Zoopla(object):
         params.update({'api_key': self.api_key})
         response = requests.get(
             self.API_URL + action, params)
-
         if response.ok:
+            json = response.json()
+            if 'error_string' in json:
+                raise ZooplaAPIException(text=json['error_string'])
             return response.json()
         else:
-            raise ZooplaAPIException(
-                str(response.status_code),
-                response.reason,
-                response.text)
+            raise ZooplaAPIException(response.text)
 
     def _base_call(self, action, request_schema, result_schema, parameters):
+        parameters.update({'api_key': self.api_key})
         request_errors = request_schema().validate(parameters)
 
         if request_errors:
@@ -92,6 +92,11 @@ class Zoopla(object):
         """
         Retrieve the average sale price for houses in a particular area.
         """
+        params.update({
+            'area_type': 'streets' if 'area_type' not in params else params['area_type'],
+            'output_type': 'county' if 'output_type' not in params else params['output_type']
+
+        })
         return self._base_call(
             action='average_area_sold_price.json',
             request_schema=BaseRequestSchema,

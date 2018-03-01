@@ -7,11 +7,8 @@ class ResponseFormatException(Exception):
 
 
 class ZooplaAPIException(Exception):
-    def __init__(self, status_code, reason, text):
-        self.status_code = status_code
-        self.reason = reason
+    def __init__(self, text):
         self.text = text
 
     def __str__(self):
-        return "Zoopla returned an error: {code} - {reason} - {message}".format(
-            code=self.status_code, reason=self.reason, message=self.text)
+        return "Zoopla returned an error: %s" % self.text

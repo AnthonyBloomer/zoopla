@@ -25,6 +25,7 @@ def test_get_average_area_sold_price(client):
         'output_type': 'outcode'
     })
     assert averages.area_name == 'SW11'
+    assert averages.sold_price_7year is not None
 
 
 def test_search_property_listings(client):
