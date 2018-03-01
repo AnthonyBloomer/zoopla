@@ -56,7 +56,8 @@ setup(name='zoopla',
       packages=['zoopla'],
       install_requires=[
           'marshmallow==2.13.6',
-          'requests==2.11.1'
+          'requests==2.11.1',
+          'enum34==1.1.6'
       ],
       classifiers=[
           'Intended Audience :: Developers',
