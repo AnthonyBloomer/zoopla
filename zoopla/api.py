@@ -12,12 +12,12 @@ from .schemas import (
     BaseRequestSchema, SearchPropertyListingRequestSchema, ZedIndexRequestSchema,
     AreaZedIndicesRequestSchema, AutocompleteRequestSchema,
     AreaValueGraphsRequestSchema, AverageSoldPriceRequestSchema, RefineEstimateSchema, RefineEstimateResultSchema,
-    ArrangeViewingSchema, ArrangeViewingResultSchema
+    ArrangeViewingSchema, ArrangeViewingResultSchema, RichlistResultSchema
 )
 
 from .enums import AreaType, OutputType
 
-import os
+import pprint
 
 logging.basicConfig()
 logger = logging.getLogger(__file__)
@@ -43,7 +43,7 @@ class Zoopla(object):
         if response.ok:
             json = response.json()
             if self.verbose:
-                print(json)
+                pprint.pprint(json)
             if 'error_string' in json:
                 raise ZooplaAPIException(text=json['error_string'])
             return response.json()
@@ -95,7 +95,17 @@ class Zoopla(object):
         """
         Retrieve richlist values for a specific area.
         """
-        raise NotImplementedError
+        params.update({
+            'area_type': str(AreaType.STREETS) if 'area_type' not in params else str(params['area_type']),
+            'output_type': str(OutputType.COUNTY) if 'output_type' not in params else str(params['output_type'])
+
+        })
+        return self._base_call(
+            action='richlist.json',
+            request_schema=BaseRequestSchema,
+            result_schema=RichlistResultSchema,
+            parameters=params
+        )
 
     def average_area_sold_price(self, params):
         """

@@ -92,3 +92,11 @@ def test_arrange_viewing(client):
     })
 
     assert 'success' in arrange_viewing and arrange_viewing.success == 1
+
+
+def test_richlist(client):
+    rl = client.property_rich_list({'area': 'SW11'})
+    assert rl is not None
+    assert 'highest' in rl
+    for l in rl.highest:
+        assert 'name' in l

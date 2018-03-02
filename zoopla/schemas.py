@@ -48,10 +48,10 @@ class BaseRequestSchema(BaseSchema):
     lat_max = fields.String()
     lon_min = fields.String()
     lon_max = fields.String()
-    output_type = fields.String()
+    output_type = fields.String(allow_none=False)
     area_type = fields.String(validate=OneOf(choices=(
         'streets', 'postcodes', 'outcodes', 'areas', 'towns', 'counties'
-    )))
+    )), allow_none=False)
 
 
 class BaseResultSchema(BaseSchema):
@@ -300,3 +300,20 @@ class ArrangeViewingSchema(BaseSchema):
 class ArrangeViewingResultSchema(BaseSchema):
     success = fields.Integer()
     error = fields.String()
+
+
+class RichList(BaseSchema):
+    name = fields.String()
+    zed_index = fields.String()
+    details_url = fields.String()
+
+
+class RichlistResultSchema(BaseRequestSchema):
+    area_name = fields.String()
+    bounding_box = fields.Nested(BoundingBoxSchema)
+    country = fields.String()
+    latitude = fields.Float()
+    longitude = fields.Float()
+    richlist_url = fields.String()
+    highest = fields.Nested(RichList, many=True)
+    lowest = fields.Nested(RichList, many=True)
