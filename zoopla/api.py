@@ -95,11 +95,16 @@ class Zoopla(object):
         """
         Retrieve richlist values for a specific area.
         """
-        params.update({
-            'area_type': str(AreaType.STREETS) if 'area_type' not in params else str(params['area_type']),
-            'output_type': str(OutputType.COUNTY) if 'output_type' not in params else str(params['output_type'])
-
-        })
+        if 'area_type' not in params:
+            params.update({
+                'area_type': str(AreaType.STREETS)
+            })
+            
+        if 'output_type' not in params:
+            params.update({
+                'output_type': str(OutputType.COUNTY)
+            })
+            
         return self._base_call(
             action='richlist.json',
             request_schema=BaseRequestSchema,
@@ -118,11 +123,15 @@ class Zoopla(object):
         if 'output_type' in params and not isinstance(params['output_type'], OutputType):
             raise ZooplaAPIException('output_type should be an instance of OutputType')
 
-        params.update({
-            'area_type': str(AreaType.STREETS) if 'area_type' not in params else str(params['area_type']),
-            'output_type': str(AreaType.COUNTY) if 'output_type' not in params else str(params['output_type'])
-
-        })
+        if 'area_type' not in params:
+            params.update({
+                'area_type': str(AreaType.STREETS)
+            })
+            
+        if 'output_type' not in params:
+            params.update({
+                'output_type': str(OutputType.COUNTY)
+            })
 
         return self._base_call(
             action='average_area_sold_price.json',
