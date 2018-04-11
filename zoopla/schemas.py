@@ -120,7 +120,7 @@ class PropertyListingSchema(BaseSchema):
     image_url = fields.String()
 
     latitude = fields.Float()
-    longitudine = fields.Float()
+    longitude = fields.Float()
 
     num_bathrooms = fields.Integer()
     num_bedrooms = fields.Integer()
