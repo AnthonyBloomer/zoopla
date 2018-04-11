@@ -100,3 +100,5 @@ def test_richlist(client):
     assert 'highest' in rl
     for l in rl.highest:
         assert 'name' in l
+
+		
