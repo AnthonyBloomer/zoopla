@@ -124,10 +124,10 @@ class PropertyListingSchema(BaseSchema):
 
     num_bathrooms = fields.Integer()
     num_bedrooms = fields.Integer()
-    num_receptions = fields.Integer()
+    num_recepts = fields.Integer()
     outcode = fields.String()
     post_town = fields.String()
-    property_tipe = fields.String()
+    property_type = fields.String()
     street_name = fields.String()
 
 
