@@ -100,6 +100,7 @@ class PropertyListingSchema(BaseSchema):
     listing_status = fields.String()
 
     price = fields.Float()
+    price_modifier = fields.String()
 
     agent_address = fields.String()
     agent_logo = fields.URL()
