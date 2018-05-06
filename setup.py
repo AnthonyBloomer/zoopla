@@ -55,9 +55,9 @@ setup(name='zoopla',
       license='MIT',
       packages=['zoopla'],
       install_requires=[
-          'marshmallow==2.13.6',
-          'requests==2.11.1',
-          'enum34==1.1.6'
+          'marshmallow>=2.13.6,<3',
+          'requests>=2.11.1,<3',
+          'enum34>=1.1.6,<2'
       ],
       classifiers=[
           'Intended Audience :: Developers',
