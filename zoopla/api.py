@@ -37,7 +37,6 @@ class Zoopla(object):
         params.update({'api_key': self.api_key})
         response = requests.get(
             self.API_URL + action, params)
-        print(response)
         if self.verbose:
             print('Request: %s' % response.url)
             print('Status Code: %s' % response.status_code)
