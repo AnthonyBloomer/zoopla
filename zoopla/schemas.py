@@ -128,7 +128,7 @@ class PropertyListingSchema(BaseSchema):
     last_published_date = fields.DateTime()
 
     image_url = fields.String()
-    # floor_plan = fields.List()
+    floor_plan = fields.List()
 
     latitude = fields.Float()
     longitude = fields.Float()
@@ -143,15 +143,6 @@ class PropertyListingSchema(BaseSchema):
 
     floor_area = fields.Nested(AreaSchema)
     maximum_price = fields.Integer()
-    #   <units>sq_feet</units>
-    #   <value>3888</value>
-    # </floor_area>
-    # <floor_area>
-    #   <name>min_floor_area</name>
-    #   <units>sq_feet</units>
-    #   <value>3888</value>
-    # </floor_area>
-    # <floor_plan>https://lc.zoocdn.com/20511d01df324401aa3dee70ca0e352264a37fe6.png</floor_plan>
 
 
 class PropertyListingResultSchema(BaseResultSchema):
