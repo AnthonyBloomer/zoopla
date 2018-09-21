@@ -37,6 +37,7 @@ class Zoopla(object):
         params.update({'api_key': self.api_key})
         response = requests.get(
             self.API_URL + action, params)
+        print(response)
         if self.verbose:
             print('Request: %s' % response.url)
             print('Status Code: %s' % response.status_code)
@@ -45,7 +46,7 @@ class Zoopla(object):
             if self.verbose:
                 pprint.pprint(json)
             if 'error_string' in json:
-                raise ZooplaAPIException(text=json['error_string'])
+               raise ZooplaAPIException(text=json['error_string'])
             return response.json()
         else:
             raise ZooplaAPIException(response.reason)
