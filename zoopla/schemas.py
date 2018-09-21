@@ -118,7 +118,7 @@ class PropertyListingSchema(BaseSchema):
     last_published_date = fields.DateTime()
 
     image_url = fields.String()
-    floor_plan = fields.URL()
+    floor_plan = fields.String()
 
     latitude = fields.Float()
     longitude = fields.Float()
@@ -131,6 +131,10 @@ class PropertyListingSchema(BaseSchema):
     property_tipe = fields.String()
     street_name = fields.String()
 
+    def print_URL(self):
+        print(self.floor_plan)
+
+    print_URL()
 
 class PropertyListingResultSchema(BaseResultSchema):
     listing = fields.Nested(PropertyListingSchema, many=True)
