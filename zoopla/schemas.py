@@ -131,10 +131,6 @@ class PropertyListingSchema(BaseSchema):
     property_tipe = fields.String()
     street_name = fields.String()
 
-    def print_URL(self):
-        print(self.floor_plan)
-
-    print_URL()
 
 class PropertyListingResultSchema(BaseResultSchema):
     listing = fields.Nested(PropertyListingSchema, many=True)
