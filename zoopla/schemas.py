@@ -92,6 +92,12 @@ class SearchPropertyListingRequestSchema(BaseRequestSchema):
             return 0.1 < value < 40
 
 
+class FloorAreaSchema(BaseSchema):
+    name = fields.String()
+    units = fields.String()
+    value = fields.Float()
+
+
 class PropertyListingSchema(BaseSchema):
     class Meta:
         dateformat = '%Y-%m-%d %H:%M:%S'
@@ -131,8 +137,8 @@ class PropertyListingSchema(BaseSchema):
     property_tipe = fields.String()
     street_name = fields.String()
 
-
-    floor_area = fields.String()
+    floor_area = fields.Nested(FloorAreaSchema)
+    maximum_price = fields.Integer()
     #   <units>sq_feet</units>
     #   <value>3888</value>
     # </floor_area>
@@ -142,7 +148,8 @@ class PropertyListingSchema(BaseSchema):
     #   <value>3888</value>
     # </floor_area>
     # <floor_plan>https://lc.zoocdn.com/20511d01df324401aa3dee70ca0e352264a37fe6.png</floor_plan>
-    #
+
+
 class PropertyListingResultSchema(BaseResultSchema):
     listing = fields.Nested(PropertyListingSchema, many=True)
     result_count = fields.Integer()
