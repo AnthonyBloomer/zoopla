@@ -128,7 +128,7 @@ class PropertyListingSchema(BaseSchema):
     last_published_date = fields.DateTime()
 
     image_url = fields.String()
-    floor_plan = fields.List()
+    floor_plan = fields.List(fields.URL())
 
     latitude = fields.Float()
     longitude = fields.Float()
