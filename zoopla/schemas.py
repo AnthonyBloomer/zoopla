@@ -92,14 +92,14 @@ class SearchPropertyListingRequestSchema(BaseRequestSchema):
             return 0.1 < value < 40
 
 
-class UnitValueSchema(BaseSchema):
-    units = fields.String()
-    value = fields.Float()
+# class UnitValueSchema(BaseSchema):
+#     units = fields.String()
+#     value = fields.Float()
 
 
-class AreaSchema(BaseSchema):
-    max_floor_area = fields.Nested(UnitValueSchema)
-    min_floor_area = fields.Nested(UnitValueSchema)
+# class AreaSchema(BaseSchema):
+#     max_floor_area = fields.Nested(UnitValueSchema)
+#     min_floor_area = fields.Nested(UnitValueSchema)
 
 
 class PropertyListingSchema(BaseSchema):
@@ -141,7 +141,7 @@ class PropertyListingSchema(BaseSchema):
     property_type = fields.String()
     street_name = fields.String()
 
-    floor_area = fields.Nested(AreaSchema)
+    # floor_area = fields.Nested(AreaSchema)
     # maximum_price = fields.Integer()
 
 
