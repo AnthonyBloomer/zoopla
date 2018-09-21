@@ -3,7 +3,7 @@ marshmallow==2.13.6
 pkginfo==1.4.1
 py==1.5.2
 pytest==3.2.2
-requests==2.11.1
+requests==2.19.1
 requests-toolbelt==0.8.0
 tqdm==4.19.6
 twine==1.9.1
