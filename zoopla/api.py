@@ -120,7 +120,7 @@ class Zoopla(object):
 
         params.update({
             'area_type': str(AreaType.STREETS) if 'area_type' not in params else str(params['area_type']),
-            'output_type': str(AreaType.COUNTY) if 'output_type' not in params else str(params['output_type'])
+            'output_type': str(OutputType.COUNTY) if 'output_type' not in params else str(params['output_type'])
 
         })
 
