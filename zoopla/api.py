@@ -45,7 +45,7 @@ class Zoopla(object):
             if self.verbose:
                 pprint.pprint(json)
             if 'error_string' in json:
-                raise ZooplaAPIException(text=json['error_string'])
+               raise ZooplaAPIException(text=json['error_string'])
             return response.json()
         else:
             raise ZooplaAPIException(response.reason)
