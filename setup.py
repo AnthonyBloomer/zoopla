@@ -4,6 +4,7 @@ from setuptools import setup, Command
 import os
 import sys
 from shutil import rmtree
+from zoopla.__version__ import __version__
 
 here = os.path.abspath(os.path.dirname(__file__))
 
@@ -45,7 +46,7 @@ class PublishCommand(Command):
 
 
 setup(name='zoopla',
-      version='0.6.4',
+      version=__version__,
       description='A Python wrapper for the Zoopla API',
       long_description=long_descr,
       url='https://github.com/anthonybloomer/zoopla',
