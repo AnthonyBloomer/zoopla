@@ -1,0 +1,31 @@
+# https://circleci.com/docs/2.0/language-python/
+version: 2
+jobs:
+  build:
+    docker:
+      - image: python:3
+    steps:
+      - checkout
+      - restore_cache:
+          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+      - run:
+          command: |
+            pip install --upgrade pip
+            pip install pipenv
+            pipenv install --deploy --ignore-pipfile
+      - save_cache:
+          key: deps9-{{ .Branch }}-{{ checksum "Pipfile.lock" }}
+          paths:
+            - ".venv"
+            - "/usr/local/bin"
+            - "/usr/local/lib/python3.7/site-packages"
+
+      - run:
+          name: Pylama
+          command: pipenv run pylama
+      - run:
+          name: Black
+          command: pipenv run black . --line-length=80 --check --exclude /migrations
+      - run:
+          name: Bandit
+          command: pipenv run bandit -r lib_db -ll -ii
