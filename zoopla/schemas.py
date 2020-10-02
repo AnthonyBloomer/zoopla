@@ -94,7 +94,7 @@ class SearchPropertyListingRequestSchema(BaseRequestSchema):
 
 class PropertyListingSchema(BaseSchema):
     class Meta:
-        dateformat = '%Y-%m-%d %H:%M:%S'
+        datetimeformat = '%Y-%m-%d %H:%M:%S'
 
     listing_id = fields.String()
     listing_status = fields.String()
