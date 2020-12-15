@@ -9,7 +9,7 @@ future==0.16.0
 idna==2.7
 marshmallow==2.16.1
 pkginfo==1.4.2
-py==1.5.2
+py==1.10.0
 pycparser==2.19
 Pygments==2.2.0
 pytest==3.2.2
