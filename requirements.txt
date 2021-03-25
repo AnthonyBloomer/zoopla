@@ -11,7 +11,7 @@ marshmallow==2.16.1
 pkginfo==1.4.2
 py==1.5.2
 pycparser==2.19
-Pygments==2.2.0
+Pygments==2.7.4
 pytest==3.2.2
 readme-renderer==22.0
 requests==2.20.0
